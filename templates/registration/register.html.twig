@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}📋TODO APP{% endblock %}
+
+{% block body %}
+    {% for flash_error in app.flashes('verify_email_error') %}
+        <div class="alert alert-danger" role="alert">{{ flash_error }}</div>
+    {% endfor %}
+    <div class="form-container">
+        <div class="form-content">
+            <h1 class="h3 mb-3 font-weight-normal welcome">Welcome to</h1>
+            <img src="{{ asset('images/todo_logo.png') }}" alt="Logo" class="logo">
+            {{ form_errors(registrationForm) }}
+
+            {{ form_start(registrationForm, {'attr': {'class': 'register-form'}}) }}
+                {{ form_row(registrationForm.email, {'label': false, 'attr': {'class': 'form-group', 'placeholder': 'Enter your email'}}) }}
+                {{ form_row(registrationForm.plainPassword, {'label': false, 'attr': {'class': 'form-group', 'placeholder': 'Enter your password'}}) }}
+                <div class="form-check">
+                    {{ form_row(registrationForm.agreeTerms, {'label': false, 'attr': {'class': 'form-check-input'}}) }}
+                    <label class="form-check-label" for="{{ registrationForm.agreeTerms.vars.id }}">
+                        I agree to the terms and conditions
+                    </label>
+                </div>
+                    <button 
+                        type="submit" 
+                        class="btn btn-primary">
+                            REGISTER
+                    </button>
+                    <p class="h3 mb-3 font-weight-normal sign_up_link">
+                        <a 
+                            href="{{ path('app_home') }}" 
+                            class="btn-secondary sign_up_link">
+                                Back to login
+                        </a>
+                    </p>
+            {{ form_end(registrationForm) }}
+        </div>
+    </div>
+{% endblock %}
